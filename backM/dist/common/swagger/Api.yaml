@@ -1,0 +1,204 @@
+swagger: "2.0"
+info:
+  version: 2.5.0
+  title: Inscription backend
+  description: Backend API for webapp Edacy
+basePath: /api/v1
+tags:
+  - name: Examples
+    description: Simple example endpoints
+  - name: Specification
+    description: The swagger API specification
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+
+definitions:
+  EcoleBody:
+    type: object
+    title: ecole
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        example: edcacy
+      description:
+        type: string
+        example: no_stress
+  EtudiantBody:
+    type: object
+    title: etudiants
+    required:
+      - nom
+      - prenom
+    properties:
+      nom:
+        type: string
+        example: diop
+      prenom:
+        type: string
+        example: moussa
+      telephone:
+        type: string
+        example: moussa
+      adresse:
+        type: string
+        example: moussa
+      email:
+        type: string
+        example: moussa@gmail.com
+  InscriptionBody:
+    type: object
+    title: inscriptions
+    required:
+      - ecole
+      - programs
+      - etudiant
+    properties:
+      ecole:
+        type: string
+        example: edacy
+      programs:
+        type: string
+        example: jhju
+      montant:
+        type: number
+        example: 46567768
+  CourseBody:
+    type: object
+    title: inscriptions
+    required:
+      - nom
+      - type
+    properties:
+      nom:
+        type: string
+        example: jhuhiu
+      description:
+        type: string
+        example: decription des cours
+      type:
+        type: string
+        example: pdf
+      link:
+        type: string
+        example: www.openClassroom.com 
+paths:
+  
+  /ecoles:
+    get:
+      tags:
+        - Ecoles
+      description: Fetch all ecoles
+      responses:
+        200:
+          description: Returns all ecoles
+    post:
+      tags:
+        - Ecoles
+      description: Create a new Ecole
+      parameters:
+        - name: Ecole
+          in: body
+          description: an example
+          required: true
+          schema: 
+            $ref: "#/definitions/EcoleBody"
+      responses:
+        200:
+          description: Returns all examples
+  /etudiants:
+    get:
+      tags:
+        - Etudiants
+      description: Fetch all etudiants
+      responses:
+        200:
+          description: Returns all etudiants
+    post:
+      tags:
+        - Etudiants
+      description: Create a new Etudiant
+      parameters:
+        - name: Etudiant
+          in: body
+          description: an example
+          required: true
+          schema: 
+            $ref: "#/definitions/EcoleBody"
+      responses:
+        200:
+          description: etudiant crée
+  /courses:
+    get:
+      tags:
+        - courses
+      description: Fetch all courses
+      responses:
+        200:
+          description: Returns all courses
+    post:
+      tags:
+        - courses
+      description: Create a new Etudiant
+      parameters:
+        - name: Course
+          in: body
+          description: an example
+          required: true
+          schema: 
+            $ref: "#/definitions/CourseBody"
+      responses:
+        200:
+          description: course crée            
+
+  /inscriptions:
+    get:
+      tags:
+        - Inscriptions
+      description: Fetch all Inscriptions
+      responses:
+        200:
+          description: Returns all Inscriptions
+    post:
+      tags:
+        - Inscriptions
+      description: Create a new Inscription
+      parameters:
+        - name: inscription
+          in: body
+          description: an example
+          required: true
+          schema: 
+            $ref: "#/definitions/InscriptionBody"
+      responses:
+        200:
+          description: Returns all examples
+
+  /inscription/{id}:
+    get:
+      tags:
+        - Inscriptions
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the Inscription to retrieve
+          type: integer
+      responses:
+        200:
+          description: Return the Inscription with the specified id
+        404:
+          description: Inscription not found
+
+  /spec:
+    get:
+      tags:
+        - Specification
+      responses:
+        200:
+          description: Return the API specification
